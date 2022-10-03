@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import ProductsPage from "./pages/Products/ProductsPage";
 import ViewProductPage from "./pages/ViewProduct/ViewProductPage";
+import EditProduct from "./pages/EditProduct/EditProduct";
 import "./styles.css";
 
 const productsData = [
@@ -14,8 +15,8 @@ const productsData = [
     price: 1400,
     inventory: {
       quantity: 100,
-      incomingDelivery: false
-    }
+      incomingDelivery: false,
+    },
   },
   {
     id: 2,
@@ -24,8 +25,8 @@ const productsData = [
     price: 2000,
     inventory: {
       quantity: 10,
-      incomingDelivery: true
-    }
+      incomingDelivery: true,
+    },
   },
   {
     id: 3,
@@ -34,8 +35,8 @@ const productsData = [
     price: 600,
     inventory: {
       quantity: 200,
-      incomingDelivery: false
-    }
+      incomingDelivery: false,
+    },
   },
   {
     id: 4,
@@ -44,9 +45,9 @@ const productsData = [
     price: 800,
     inventory: {
       quantity: 0,
-      incomingDelivery: true
-    }
-  }
+      incomingDelivery: true,
+    },
+  },
 ];
 
 const appsData = [
@@ -54,21 +55,19 @@ const appsData = [
     id: 1,
     name: "Farmville",
     type: "game",
-    price: 0
+    price: 0,
   },
   {
     id: 2,
     name: "Facebook",
     type: "social",
-    price: 0
-  }
+    price: 0,
+  },
 ];
 
 export default function App() {
   const [products, setProducts] = useState(productsData);
   const [apps, setApps] = useState(appsData);
-
-  console.log({ products, apps });
 
   return (
     <div className="App">
@@ -86,13 +85,17 @@ export default function App() {
         </nav>
       </header>
       <Routes>
-        {/* 
-          TODO: add your route for editing a product here. The 
-          Route should be /products/:id/edit and it should use
-          the EditProduct element
-        */}
+        <Route
+          path="/products/:id/edit"
+          element={
+            <EditProduct products={products} setProducts={setProducts} />
+          }
+        />
         <Route path="/products/:id" element={<ViewProductPage />} />
-        <Route path="/products" element={<ProductsPage products={products} />}/>
+        <Route
+          path="/products"
+          element={<ProductsPage products={products} />}
+        />
         <Route path="/" element={<Home />} />
       </Routes>
     </div>
